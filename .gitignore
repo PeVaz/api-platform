@@ -1,4 +1,5 @@
 /sfcasts
+/migrations
 
 ###> symfony/framework-bundle ###
 /.env.local
