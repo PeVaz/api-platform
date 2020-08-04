@@ -7,6 +7,7 @@ use App\Repository\CheeseListingRepository;
 use Doctrine\ORM\Mapping as ORM;
 use Carbon\Carbon;
 use Symfony\Component\Serializer\Annotation\Groups;
+use Symfony\Component\Serializer\Annotation\SerializedName;
 
 /**
  *@ApiResource(
@@ -62,8 +63,9 @@ class CheeseListing
      */
     private $isPublished = false;
 
-    public function __construct()
+    public function __construct(string $title)
     {
+        $this->title = $title;
         $this->createdAt = new \DateTimeImmutable();
     }
 
@@ -77,12 +79,6 @@ class CheeseListing
         return $this->title;
     }
 
-    public function setTitle(string $title): self
-    {
-        $this->title = $title;
-
-        return $this;
-    }
 
     public function getDescription(): ?string
     {
@@ -97,6 +93,8 @@ class CheeseListing
 
      /**
      * The description of the cheese as raw text.
+     * 
+     * @SerializedName("description")
      *
      * @Groups("cheese_listing:write")
      */
