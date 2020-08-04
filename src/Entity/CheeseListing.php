@@ -8,11 +8,16 @@ use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\BooleanFilter;
 use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\SearchFilter;
 use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\RangeFilter;
 use ApiPlatform\Core\Serializer\Filter\PropertyFilter;
+
+use Symfony\Component\Serializer\Annotation\Groups;
+use Symfony\Component\Serializer\Annotation\SerializedName;
+use Symfony\Component\Validator\Constraints as Assert;
+
+
 use App\Repository\CheeseListingRepository;
 use Doctrine\ORM\Mapping as ORM;
 use Carbon\Carbon;
-use Symfony\Component\Serializer\Annotation\Groups;
-use Symfony\Component\Serializer\Annotation\SerializedName;
+
 
 /**
  *@ApiResource(
@@ -49,6 +54,13 @@ class CheeseListing
     /**
      * @Groups({"cheese_listing:read", "cheese_listing:write"})
      * 
+     * @Assert\NotBlank()
+     * @Assert\Length(
+     *     min=2,
+     *     max=50,
+     *     maxMessage="Describe your cheese in 50 chars or less"
+     * )
+     * 
      * @ORM\Column(type="string", length=255)
      */
     private $title;
@@ -56,12 +68,16 @@ class CheeseListing
     /**
      * @Groups({"cheese_listing:read"})
      * 
+     * @Assert\NotBlank()
+     * 
      * @ORM\Column(type="text")
      */
     private $description;
 
     /**
      * @Groups({"cheese_listing:read", "cheese_listing:write"})
+     * 
+     * @Assert\NotBlank()
      * 
      * @ORM\Column(type="integer")
      */
