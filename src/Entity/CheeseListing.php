@@ -23,8 +23,10 @@ use Carbon\Carbon;
  *@ApiResource(
  *     collectionOperations={"get", "post"},
  *     itemOperations={
- *      "get"={},
- *      "put"
+ *          "get"={
+ *              "normalization_context"={"groups"={"cheese_listing:read", "cheese_listing:item:get"}},
+ *          },
+ *          "put"
  * },
  *     shortName="cheeses" ,
  *     normalizationContext={"groups"={"cheese_listing:read"}, "swagger_definition_name"="Read"},
@@ -52,7 +54,7 @@ class CheeseListing
     private $id;
 
     /**
-     * @Groups({"cheese_listing:read", "cheese_listing:write"})
+     * @Groups({"cheese_listing:read", "cheese_listing:write", "user:read"})
      * 
      * @Assert\NotBlank()
      * @Assert\Length(
@@ -75,7 +77,7 @@ class CheeseListing
     private $description;
 
     /**
-     * @Groups({"cheese_listing:read", "cheese_listing:write"})
+     * @Groups({"cheese_listing:read", "cheese_listing:write", "user:read"})
      * 
      * @Assert\NotBlank()
      * 
