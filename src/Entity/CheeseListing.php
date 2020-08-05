@@ -37,8 +37,13 @@ use Carbon\Carbon;
  *     }
  * )
  * 
- * @ApiFilter(BooleanFilter::class, properties={"isPublished"}) 
- * @ApiFilter(SearchFilter::class, properties={"title": "partial", "description": "partial"})
+ * @ApiFilter(BooleanFilter::class, properties={"isPublished"})
+ * @ApiFilter(SearchFilter::class, properties={
+ *     "title": "partial",
+ *     "description": "partial",
+ *     "owner": "exact",
+ *     "owner.username": "partial"
+ * })
  * @ApiFilter(RangeFilter::class, properties={"price"})
  * @ApiFilter(PropertyFilter::class)
  * 
