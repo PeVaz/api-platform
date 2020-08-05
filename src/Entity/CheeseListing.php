@@ -54,7 +54,7 @@ class CheeseListing
     private $id;
 
     /**
-     * @Groups({"cheese_listing:read", "cheese_listing:write", "user:read"})
+     * @Groups({"cheese_listing:read", "cheese_listing:write", "user:read", "user:write"})
      * 
      * @Assert\NotBlank()
      * @Assert\Length(
@@ -77,7 +77,7 @@ class CheeseListing
     private $description;
 
     /**
-     * @Groups({"cheese_listing:read", "cheese_listing:write", "user:read"})
+     * @Groups({"cheese_listing:read", "cheese_listing:write", "user:read", "user:write"})
      * 
      * @Assert\NotBlank()
      * 
@@ -149,7 +149,7 @@ class CheeseListing
      * 
      * @SerializedName("description")
      *
-     * @Groups("cheese_listing:write")
+     * @Groups({"cheese_listing:write", "user:write"})
      */
     public function setTextDescription(string $description): self
     {
